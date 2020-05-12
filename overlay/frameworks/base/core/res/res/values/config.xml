@@ -430,6 +430,12 @@
     <!-- Should the pinner service pin the Home application? -->
     <bool name="config_pinnerHomeApp">true</bool>
 
+    <!-- Enable live display -->
+    <bool name="config_liveDisplayAvailable">true</bool>
+
+    <!-- Use live display for temperature control-->
+    <bool name="config_nightDisplayAvailable">false</bool>
+
     <!-- Fix for Goodix Reset on Every Reboot -->
     <bool name="config_cleanupUnusedFingerprints">false</bool>
 
