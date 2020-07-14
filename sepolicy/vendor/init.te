@@ -57,3 +57,7 @@ allow init vendor_file:file execute;
 allow init firmware_file:filesystem getattr;
 
 #allow init shell_exec:file execute_no_trans;
+
+allow init vendor_data_file:file lock;
+allow init hal_audio_default:binder call;
+allow init platform_app:binder call;
