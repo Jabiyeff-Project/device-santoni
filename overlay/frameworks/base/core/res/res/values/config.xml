@@ -458,6 +458,9 @@
          May be less than the minimum allowed brightness setting
          that can be set by the user. -->
     <integer name="config_screenBrightnessDoze">10</integer>
+
+    <!-- Whether the device supports Smart Pixels -->
+    <bool name="config_enableSmartPixels">false</bool>
 	
     <!-- Smart charge sysfs node and value for suspend/resume charging-->
     <bool name="config_smartChargingAvailable">true</bool>
