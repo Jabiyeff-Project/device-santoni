@@ -20,6 +20,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
 
 $(call inherit-product, vendor/xiaomi/santoni/santoni-vendor.mk)
+$(call inherit-product, vendor/lawnchair/lawnchair.mk)
 
 #HAls
 PRODUCT_SOONG_NAMESPACES += hardware/qcom-caf/msm8996/display
@@ -180,7 +181,8 @@ include $(LOCAL_PATH)/rootdir/charger/charger.mk
 
 # Dex
 PRODUCT_DEXPREOPT_SPEED_APPS += \
-    Settings
+    Settings \
+    Lawnchair
 
 # Display
 PRODUCT_PACKAGES += \
