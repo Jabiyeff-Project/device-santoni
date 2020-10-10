@@ -115,7 +115,7 @@ Only the three quirks included above are recognized at this point:
     </Settings>
     <Settings>
         <Variant name="slow-cpu" enabled="true" />
-    </Settings> -->
+    </Settings>
     <Encoders>
         <!-- Video Hardware  -->
         <MediaCodec name="OMX.qcom.video.encoder.avc" type="video/avc" >
