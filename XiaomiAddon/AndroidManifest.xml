@@ -102,16 +102,5 @@
             </intent-filter>
         </service>
 
-        <service
-            android:name="com.xiaomi.addon.SpectrumTileService"
-            android:icon="@drawable/ic_spectrum"
-            android:label="@string/spectrum_profile_title"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
-            <intent-filter>
-                <action
-                    android:name="android.service.quicksettings.action.QS_TILE"/>
-            </intent-filter>
-        </service>
-
     </application>
 </manifest>

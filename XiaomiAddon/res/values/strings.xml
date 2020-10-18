@@ -32,18 +32,6 @@
     <string name="device_kcal_title">Display Color Calibration</string>
     <string name="kcal_enabled_summary">Calibrate Display Using KCAL</string>
 
-    <!-- Spectrum Profiles -->
-    <string name="spectrum_profile_title">Spectrum</string>
-    <string name="spectrum_title">Spectrum Profile</string>
-    <string name="spectrum_summary">Choose your Spectrum Profile</string>
-    <string name="spectrum_dialogTitle">Choose your Spectrum Profile</string>
-
-    <!-- Values for Spectrum Presets -->
-    <string name="spectrum_performance">Performance</string>
-    <string name="spectrum_battery">Battery</string>
-    <string name="spectrum_gaming">Gaming</string>
-    <string name="spectrum_balance">Balance</string>
-
     <!-- kcal -->
     <string name="advanced_settings_kcal">Display Color Calibration</string>
     <string name="cat_colormanagement">Color Settings</string>
