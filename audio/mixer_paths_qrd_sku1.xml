@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!--
-    Copyright (c) 2015-16 The Linux Foundation. All rights reserved.
+    Copyright (c) 2015-2016, 2018 The Linux Foundation. All rights reserved.
 
     Redistribution and use in source and binary forms, with or without
     modification, are permitted provided that the following conditions are
@@ -82,7 +82,7 @@
     <ctl name="EAR_S" value="ZERO" />
     <ctl name="HPHL" value="ZERO" />
     <ctl name="HPHR" value="ZERO" />
-    <ctl name="Lineout_1 amp" value="DISABLE"/> 
+     <ctl name="Ext Spk Switch" value="Off"/>
     <ctl name="headset amp" value="DISABLE"/>
     <ctl name="SPK DAC Switch" value="0" />
     <ctl name="SPK" value="ZERO" />
@@ -1072,7 +1072,7 @@
         <ctl name="RX2 MIX1 INP1" value="RX2" />
         <ctl name="RDAC2 MUX" value="RX2" />
         <ctl name="HPHR" value="Switch" />
-        <ctl name="Lineout_1 amp" value="ENABLE"/>
+        <ctl name="Ext Spk Switch" value="On"/>
    </path>
 
     <path name="wsa-speaker">
