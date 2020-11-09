@@ -1145,3 +1145,46 @@ void IPACM_Iface::delete_iface(void)
 			IPACM_Iface::ipacmcfg->iface_table[ipa_if_num].iface_name, ipa_if_num);
 	delete this;
 }
+
+#ifdef FEATURE_VLAN_BACKHAUL
+int IPACM_Iface::ipa_get_vlan_info(int if_index, int *vlan_id, char *iface_name) {
+	struct vlan_ioctl_args vlan_info;
+	struct ifreq ifr;
+	int fd;
+
+	if((fd = socket(AF_INET, SOCK_DGRAM, 0)) < 0)
+	{
+		IPACMERR("get interface index socket create failed \n");
+		return IPACM_FAILURE;
+	}
+
+	memset(&ifr, 0, sizeof(struct ifreq));
+	ifr.ifr_ifindex = if_index;
+	if (ioctl(fd, SIOCGIFNAME, &ifr)) {
+		IPACMDBG_H("ioctl to obtain interface name failed errno : %d name : %s\n",errno, strerror(errno));
+		close(fd);
+		return IPACM_FAILURE;
+	}
+
+	strlcpy(iface_name, ifr.ifr_name, IPA_RESOURCE_NAME_MAX);
+	IPACMDBG_H("Query vlan id for interface %s id %d \n",ifr.ifr_name, if_index);
+
+	memset(&vlan_info, 0, sizeof(struct vlan_ioctl_args));
+	strlcpy(vlan_info.device1, ifr.ifr_name, sizeof(vlan_info.device1));
+	vlan_info.cmd = GET_VLAN_VID_CMD;
+	IPACMDBG_H("netdev %s vlan_info cmd : %d\n",vlan_info.device1, vlan_info.cmd);
+
+	if (ioctl(fd, SIOCGIFVLAN, &vlan_info)) {
+		IPACMDBG_H("ioctl to obtain vlan id failed errno : %d error : %s\n",errno, strerror(errno));
+		close(fd);
+		return IPACM_FAILURE;
+	}
+	else {
+		*vlan_id = vlan_info.u.VID;
+		IPACMDBG_H("netdev %s vlan id : %d\n",dev_name, *vlan_id);
+	}
+
+	close(fd);
+	return IPACM_SUCCESS;
+}
+#endif

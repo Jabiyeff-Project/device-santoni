@@ -95,6 +95,36 @@ typedef struct
 	bool coalesce_udp_enable;
 }ipacm_coalesce;
 
+#ifdef FEATURE_VLAN_BACKHAUL
+typedef struct
+{
+	ipa_ip_type iptype;
+	char name[IPA_RESOURCE_NAME_MAX];
+	uint16_t vlan_id;
+	uint8_t dscp;
+	bool v4_addr_set;
+	uint32_t v4_addr;
+	bool v6_global_addr_set;
+	uint32_t ipv6_addr[MAX_DEFAULT_v6_ROUTE_RULES][4];
+	int num_dft_rt_v6;
+	uint32_t dft_rt_rule_hdl[MAX_DEFAULT_v4_ROUTE_RULES +2*MAX_DEFAULT_v6_ROUTE_RULES];
+	int num_ipv6_dest_flt_rule;
+	uint32_t ipv6_dest_flt_rule_hdl[MAX_DEFAULT_v6_ROUTE_RULES];
+	bool v4_upstream_set;
+	bool v6_upstream_set;
+	bool wan_clnt_set;
+	uint32_t wan_clnt_id;
+}vlan_iface_context;
+
+typedef struct
+{
+	bool netdev_in_vlan_mode;
+	int upstream_if_index;
+	uint32_t wan_v4_addr;
+	std::map <int , vlan_iface_context *> vlan_iface_table;
+}vlan_wan_context;
+#endif
+
 /* wan iface */
 class IPACM_Wan : public IPACM_Iface
 {
@@ -405,6 +435,10 @@ private:
 	/* handle for TCP RST rule */
 	uint32_t tcp_rst_hdl;
 
+#ifdef FEATURE_VLAN_BACKHAUL
+	vlan_wan_context vlan_wan_ctx;
+#endif
+
 	inline ipa_wan_client* get_client_memptr(ipa_wan_client *param, int cnt)
 	{
 	    char *ret = ((char *)param) + (wan_client_len * cnt);
@@ -583,7 +617,12 @@ private:
 		return IPACM_SUCCESS;
 	}
 
+#ifndef FEATURE_VLAN_BACKHAUL
 	int handle_wan_hdr_init(uint8_t *mac_addr);
+#else
+	int handle_wan_hdr_init(uint8_t *mac_addr, uint16_t vlan_id = 0);
+#endif
+
 	int handle_wan_client_ipaddr(ipacm_event_data_all *data);
 	int handle_wan_client_route_rule(uint8_t *mac_addr, ipa_ip_type iptype);
 
@@ -676,6 +715,18 @@ private:
 
 	/* Query mtu size */
 	int query_mtu_size();
+
+#ifdef FEATURE_VLAN_BACKHAUL
+	int handle_vlan_wan_iface_up(int if_index);
+
+	int handle_vlan_wan_iface_addr_evt(ipacm_event_data_addr *data = NULL);
+
+	int handle_vlan_wan_iface_neigh_evt(ipacm_event_data_all *data = NULL);
+
+	int handle_vlan_wan_iface_upstream_add(ipacm_event_data_iptype *data = NULL);
+
+	int handle_vlan_wan_iface_down(int if_index);
+#endif
 };
 
 #endif /* IPACM_WAN_H */

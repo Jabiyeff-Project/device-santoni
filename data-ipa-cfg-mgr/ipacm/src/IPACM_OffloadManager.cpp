@@ -584,6 +584,7 @@ RET IPACM_OffloadManager::stopAllOffload()
 
 RET IPACM_OffloadManager::setQuota(const char * upstream_name /* upstream */, uint64_t mb/* limit */)
 {
+#ifndef FEATURE_DISABLE_STATS
 	wan_ioctl_set_data_quota quota;
 	int fd = -1, rc = 0, err_type = 0;
 
@@ -621,22 +622,26 @@ RET IPACM_OffloadManager::setQuota(const char * upstream_name /* upstream */, ui
 		}
 	}
 	close(fd);
+#else
+	IPACMDBG_H("upstream %s mb %lu ignored on APQ target\n", upstream_name, mb);
+#endif
 	return SUCCESS;
 }
 
 RET IPACM_OffloadManager::getStats(const char * upstream_name /* upstream */,
 		bool reset /* reset */, OffloadStatistics& offload_stats/* ret */)
 {
+#ifndef FEATURE_DISABLE_STATS
 	int fd = -1;
 	wan_ioctl_query_tether_stats_all stats;
 
 	if ((fd = open(DEVICE_NAME, O_RDWR)) < 0) {
-        IPACMERR("Failed opening %s.\n", DEVICE_NAME);
-        return FAIL_HARDWARE;
-    }
+		IPACMERR("Failed opening %s.\n", DEVICE_NAME);
+		return FAIL_HARDWARE;
+	}
 
-    memset(&stats, 0, sizeof(stats));
-    if (strlcpy(stats.upstreamIface, upstream_name, IFNAMSIZ) >= IFNAMSIZ) {
+	memset(&stats, 0, sizeof(stats));
+	if (strlcpy(stats.upstreamIface, upstream_name, IFNAMSIZ) >= IFNAMSIZ) {
 		IPACMERR("String truncation occurred on upstream\n");
 		close(fd);
 		return FAIL_INPUT_CHECK;
@@ -652,9 +657,14 @@ RET IPACM_OffloadManager::getStats(const char * upstream_name /* upstream */,
 	/* feedback to IPAHAL*/
 	offload_stats.tx = stats.tx_bytes;
 	offload_stats.rx = stats.rx_bytes;
-
-	IPACMDBG_H("send getStats tx:%llu rx:%llu \n", (long long)offload_stats.tx, (long long)offload_stats.rx);
 	close(fd);
+#else
+	//stub out getStats for APQ platform
+	IPACMDBG_H("upstream %s reset %d ignored on APQ platform\n", upstream_name, reset);
+	offload_stats.tx = 1;
+	offload_stats.rx = 1;
+#endif
+	IPACMDBG_H("send getStats tx:%llu rx:%llu \n", (long long)offload_stats.tx, (long long)offload_stats.rx);
 	return SUCCESS;
 }
 
@@ -742,16 +752,17 @@ int IPACM_OffloadManager::ipa_get_if_index(const char * if_name, int * if_index)
 
 int IPACM_OffloadManager::resetTetherStats(const char * upstream_name /* upstream */)
 {
+#ifndef FEATURE_DISABLE_STATS
 	int fd = -1;
 	wan_ioctl_reset_tether_stats stats;
 
 	if ((fd = open(DEVICE_NAME, O_RDWR)) < 0) {
-        IPACMERR("Failed opening %s.\n", DEVICE_NAME);
-        return FAIL_HARDWARE;
-    }
+		IPACMERR("Failed opening %s.\n", DEVICE_NAME);
+		return FAIL_HARDWARE;
+	}
 
-    memset(stats.upstreamIface, 0, IFNAMSIZ);
-    if (strlcpy(stats.upstreamIface, upstream_name, IFNAMSIZ) >= IFNAMSIZ) {
+	memset(stats.upstreamIface, 0, IFNAMSIZ);
+	if (strlcpy(stats.upstreamIface, upstream_name, IFNAMSIZ) >= IFNAMSIZ) {
 		IPACMERR("String truncation occurred on upstream\n");
 		close(fd);
 		return FAIL_INPUT_CHECK;
@@ -762,8 +773,9 @@ int IPACM_OffloadManager::resetTetherStats(const char * upstream_name /* upstrea
 		close(fd);
 		return FAIL_HARDWARE;
 	}
-	IPACMDBG_H("Reset Interface %s stats\n", upstream_name);
 	close(fd);
+#endif
+	IPACMDBG_H("Reset Interface %s stats\n", upstream_name);
 	return IPACM_SUCCESS;
 }
 

@@ -52,6 +52,9 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "IPACM_Config.h"
 #include "IPACM_Defs.h"
 #include <string.h>
+#include <linux/if_vlan.h>
+#include <linux/sockios.h>
+#include <map>
 
 /* current support 2 ipv6-address*/
 #define MAX_DEFAULT_v4_ROUTE_RULES  1
@@ -149,6 +152,11 @@ public:
 	void delete_iface(void);
 
 	bool is_global_ipv6_addr(uint32_t* ipv6_addr);
+
+#ifdef FEATURE_VLAN_BACKHAUL
+	/* Query interface vlan id by given linux interface index */
+	int ipa_get_vlan_info(int if_index, int *vlan_id, char *iface_name);
+#endif
 
 private:
 

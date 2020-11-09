@@ -110,6 +110,14 @@ void IPACM_IfaceManager::event_callback(ipa_cm_event_id event, void *param)
 				IPACMERR("IPA_LINK_UP_EVENT: not supported iface id: %d\n", evt_data->if_index);
 				break;
 			}
+#ifdef FEATURE_VLAN_BACKHAUL
+			/* Ignore non-LTE backhaul*/
+			if (strstr(IPACM_Iface::ipacmcfg->iface_table[ipa_interface_index].iface_name, VETH_NETDEV)) {
+				IPACMDBG("Ignoring link up for %s\n",
+					IPACM_Iface::ipacmcfg->iface_table[ipa_interface_index].iface_name)
+				break;
+			}
+#endif
 			/* LTE-backhaul */
 			if(IPACM_Iface::ipacmcfg->iface_table[ipa_interface_index].if_cat == EMBMS_IF)
 			{
@@ -135,10 +143,16 @@ void IPACM_IfaceManager::event_callback(ipa_cm_event_id event, void *param)
 			/* check if it's WAN_IF */
 			if(IPACM_Iface::ipacmcfg->iface_table[ipa_interface_index].if_cat == WAN_IF)
 			{
-				/* usb-backhaul using sta_mode ECM_WAN*/
-				IPACMDBG_H("WAN-usb (%s) link up, iface: %d: \n", IPACM_Iface::ipacmcfg->iface_table[ipa_interface_index].iface_name, evt_data->if_index);
+				/* ETH/usb-backhaul using sta_mode ECM_WAN*/
+				IPACMDBG_H("WAN-(%s) link up, iface: %d: \n", IPACM_Iface::ipacmcfg->iface_table[ipa_interface_index].iface_name, evt_data->if_index);
 				ifmgr_data.if_index = evt_data->if_index;
-				ifmgr_data.if_type = ECM_WAN;
+#ifdef FEATURE_VLAN_BACKHAUL
+				if (strncmp(IPACM_Iface::ipacmcfg->iface_table[ipa_interface_index].iface_name,
+						VETH_NETDEV, IPA_IFACE_NAME_LEN) == 0)
+					ifmgr_data.if_type = ETH_WAN;
+				else
+#endif
+					ifmgr_data.if_type = ECM_WAN;
 				create_iface_instance(&ifmgr_data);
 			}
 			else
@@ -451,6 +465,12 @@ int IPACM_IfaceManager::create_iface_instance(ipacm_ifacemgr_data *param)
 					else
 					{
 						w = new IPACM_Wan(ipa_interface_index, is_sta_mode, NULL);
+						if (w->rx_prop == NULL && w->tx_prop == NULL)
+						{
+							/* close the netdev instance if IPA not support*/
+							w->delete_iface();
+							return IPACM_FAILURE;
+						}
 					}
 					IPACM_EvtDispatcher::registr(IPA_ADDR_ADD_EVENT, w);
 #ifdef FEATURE_IPA_ANDROID

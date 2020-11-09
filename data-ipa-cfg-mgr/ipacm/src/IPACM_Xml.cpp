@@ -164,6 +164,10 @@ static int ipacm_cfg_xml_parse_tree
 	int str_size;
 	char* content;
 	char content_buf[MAX_XML_STR_LEN];
+#ifdef FEATURE_VLAN_BACKHAUL
+	uint16_t vlanid;
+	uint8_t dscp;
+#endif
 
 	if (NULL == xml_node)
 		return ret_val;
@@ -184,6 +188,10 @@ static int ipacm_cfg_xml_parse_tree
 						IPACM_util_icmp_string((char*)xml_node->name, IPACMALG_TAG) == 0 ||
 						IPACM_util_icmp_string((char*)xml_node->name, ALG_TAG) == 0 ||
 						IPACM_util_icmp_string((char*)xml_node->name, IPACMNat_TAG) == 0 ||
+#ifdef FEATURE_VLAN_BACKHAUL
+						IPACM_util_icmp_string((char*)xml_node->name, IPACM_QoS_Flag_TAG) ==0 ||
+						IPACM_util_icmp_string((char*)xml_node->name, QoS_Mapping_TAG) == 0 ||
+#endif
 						IPACM_util_icmp_string((char*)xml_node->name, IP_PassthroughFlag_TAG) == 0)
 				{
 					if (0 == IPACM_util_icmp_string((char*)xml_node->name, IFACE_TAG))
@@ -203,6 +211,13 @@ static int ipacm_cfg_xml_parse_tree
 						/* increase iface entry number */
 						config->alg_config.num_alg_entries++;
 					}
+#ifdef FEATURE_VLAN_BACKHAUL
+					if (0 == IPACM_util_icmp_string((char*)xml_node->name, QoS_Mapping_TAG))
+					{
+						config->qos_config.num_mappings++;
+					}
+#endif
+
 					/* go to child */
 					ret_val = ipacm_cfg_xml_parse_tree(xml_node->children, config);
 				}
@@ -448,6 +463,36 @@ static int ipacm_cfg_xml_parse_tree
 						IPACMDBG_H("Nat Table Max Entries %d\n", config->nat_max_entries);
 					}
 				}
+#ifdef FEATURE_VLAN_BACKHAUL
+				else if (IPACM_util_icmp_string((char*)xml_node->name, QoS_VLANID_TAG) == 0)
+				{
+					content = IPACM_read_content_element(xml_node);
+					if (content)
+					{
+						str_size = strlen(content);
+						memset(content_buf, 0 , sizeof(content_buf));
+						memcpy(content_buf, (void *)content, str_size);
+						vlanid= atoi(content_buf);
+						IPACMDBG_H("VLAN ID %d\n",vlanid);
+						if (config->qos_config.num_mappings <= IPA_MAX_QOS_ENTRIES)
+							config->qos_config.vlan_dscp_map[config->qos_config.num_mappings -1].vlan_id = vlanid;
+					}
+				}
+				else if (IPACM_util_icmp_string((char*)xml_node->name, QoS_DSCP_TAG) == 0)
+				{
+					content = IPACM_read_content_element(xml_node);
+					if (content)
+					{
+						str_size = strlen(content);
+						memset(content_buf, 0 , sizeof(content_buf));
+						memcpy(content_buf, (void *)content, str_size);
+						dscp= atoi(content_buf);
+						IPACMDBG_H("DSCP %d\n",dscp);
+						if (config->qos_config.num_mappings <= IPA_MAX_QOS_ENTRIES)
+							config->qos_config.vlan_dscp_map[config->qos_config.num_mappings -1].dscp = dscp;
+					}
+				}
+#endif
 			}
 			break;
 		default:

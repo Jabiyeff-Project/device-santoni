@@ -49,6 +49,8 @@ IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <stdint.h>
 #include <libxml/parser.h>
 #include <libxml/tree.h>
+#include <map>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -181,6 +183,11 @@ if (!(a)) {                                                 \
 #define IP_PassthroughFlag_TAG               "IPPassthroughFlag"
 #define IP_PassthroughMode_TAG               "IPPassthroughMode"
 
+#define IPACM_QoS_Flag_TAG         "IPACMQoS"
+#define QoS_Mapping_TAG            "Mapping"
+#define QoS_DSCP_TAG               "DSCP"
+#define QoS_VLANID_TAG             "VLANID"
+
 /*---------------------------------------------------------------------------
       IP protocol numbers - use in dss_socket() to identify protocols.
       Also contains the extension header types for IPv6.
@@ -268,7 +275,24 @@ typedef struct
 	ipacm_alg alg_entries[IPA_MAX_ALG_ENTRIES];
 } ipacm_alg_conf_t;
 
- 
+#ifdef FEATURE_VLAN_BACKHAUL
+/* ipacm_vlan_dscp_mapping - store dynamically changing dscp/vlan mappings
+ * dscp - 6 bits (0-63)
+ * vlan id - 12 bits (1-4095)
+ */
+typedef struct
+{
+	uint16_t vlan_id;
+	uint8_t dscp;
+}ipacm_vlan_dscp_mapping_t;
+
+typedef struct
+{
+	uint8_t num_mappings;
+	ipacm_vlan_dscp_mapping_t vlan_dscp_map[IPA_MAX_QOS_ENTRIES] ;
+} ipacm_qos_conf_t;
+#endif
+
 typedef struct  _IPACM_conf_t
 {
 	ipacm_iface_conf_t iface_config;
@@ -280,6 +304,9 @@ typedef struct  _IPACM_conf_t
 	bool odu_embms_enable;
 	int num_wlan_guest_ap;
 	bool ip_passthrough_mode;
+#ifdef FEATURE_VLAN_BACKHAUL
+	ipacm_qos_conf_t qos_config;
+#endif
 } IPACM_conf_t;  
 
 /* This function read IPACM XML configuration*/

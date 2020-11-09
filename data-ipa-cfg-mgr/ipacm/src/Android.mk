@@ -68,6 +68,13 @@ LOCAL_CFLAGS += $(shell if [ -a $(filetoadd) ] ; then echo -include $(filetoadd)
 filetoadd = bionic/libc/kernel/arch-arm/asm/byteorder.h
 LOCAL_CFLAGS += $(shell if [ -a $(filetoadd) ] ; then echo -include $(filetoadd) ; fi ;)
 
+ifeq ($(call is-board-platform,msmnile),true)
+ifeq ($(TARGET_BOARD_SUFFIX),_gvmq)
+LOCAL_CFLAGS += -DFEATURE_DISABLE_STATS
+LOCAL_CFLAGS += -DFEATURE_VLAN_BACKHAUL
+endif
+endif
+
 LOCAL_SRC_FILES := IPACM_Main.cpp \
 		IPACM_EvtDispatcher.cpp \
 		IPACM_Config.cpp \

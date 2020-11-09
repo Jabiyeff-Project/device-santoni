@@ -83,6 +83,11 @@
 			   <Category>ODU</Category>
 			</Iface>
 			<Iface>
+			   <Name>VETH0</Name>
+			   <Category>WAN</Category>
+			   <Mode>ROUTER</Mode>
+			</Iface>
+			<Iface>
 			   <Name>bridge0</Name>
 			   <Category>VIRTUAL</Category>
 			</Iface>
@@ -176,5 +181,23 @@
 		<IPACMNAT>		
  	        <MaxNatEntries>500</MaxNatEntries>
 		</IPACMNAT>
-		</IPACM>
+		<IPACMQoS>
+			<Mapping>
+				<VLANID>0</VLANID>
+				<DSCP>0</DSCP>
+			</Mapping>
+			<Mapping>
+				<VLANID>0</VLANID>
+				<DSCP>0</DSCP>
+			</Mapping>
+			<Mapping>
+				<VLANID>0</VLANID>
+				<DSCP>0</DSCP>
+			</Mapping>
+			<Mapping>
+				<VLANID>0</VLANID>
+				<DSCP>0</DSCP>
+			</Mapping>
+		</IPACMQoS>
+	</IPACM>
 </system>
