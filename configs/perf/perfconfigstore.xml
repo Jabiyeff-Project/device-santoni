@@ -25,6 +25,7 @@ property Name is called. -->
                 <Prop Name="ro.vendor.qti.sys.fw.empty_app_percent" Value="50" />
                 <Prop Name="ro.vendor.qti.sys.fw.trim_empty_percent" Value="100" />
                 <Prop Name="ro.vendor.qti.sys.fw.trim_cache_percent" Value="100" />
+                <Prop Name="ro.vendor.qti.sys.fw.trim_enable_memory" Value="2147483648" />
                 <Prop Name="ro.vendor.qti.am.reschedule_service" Value="true" />
                 <Prop Name="ro.vendor.at_library" Value="libqti-at.so" />
                 <Prop Name="vendor.debug.enable.lm" Value="false" />
@@ -32,9 +33,8 @@ property Name is called. -->
                 <Prop Name="vendor.perf.gestureflingboost.enable" Value="true" />
 
                 <!--Vendor Properties -->
-                <Prop Name="vendor.iop.enable_iop" Value="1" />
-                <Prop Name="vendor.iop.enable_uxe" Value="1" />
-                <Prop Name="vendor.perf.iop_v3.enable" Value="1" />
+                <Prop Name="vendor.iop.enable_uxe" Value="0" />
+                <Prop Name="vendor.perf.iop_v3.enable" Value="0" />
                 <Prop Name="vendor.perf.iop_v3.enable.debug" Value="0" />
                 <Prop Name="vendor.enable.prefetch" Value="0" />
                 <Prop Name="vendor.iop.enable_prefetch_ofr" Value="0" />

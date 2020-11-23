@@ -99,6 +99,9 @@ need to be added just before the end of it's major group. -->
         <Minor OpcodeValue="0x2A" Node="/proc/sys/kernel/sched_prefer_spread" />
         <Minor OpcodeValue="0x2C" Node="/proc/%d/sched_boost" Supported="yes" /> <!-- enable sched_task_boost for top-app render thread-->
         <Minor OpcodeValue="0x2D" Node="/proc/%d/sched_boost" Supported="yes" /> <!-- disable sched_task_boost for top-app render thread-->
+        <Minor OpcodeValue="0x2E" Node="/proc/sys/kernel/sched_task_unfilter_period" />
+        <Minor OpcodeValue="0x2F" Node="/proc/sys/kernel/sched_conservative_pl" />
+        <Minor OpcodeValue="0x32" Node="proc/sys/kernel/walt_rtg_cfs_boost_prio" />
     <!-- sched major end -->
 
     <!-- core hotplug major start -->
