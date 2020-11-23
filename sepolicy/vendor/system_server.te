@@ -24,3 +24,5 @@ allow system_server sysfs_battery_supply:file rw_file_perms;
 
 # power
 allow system_server sysfs_battery_supply:file { read open getattr };
+
+get_prop(system_server, vendor_alarm_boot_prop)
