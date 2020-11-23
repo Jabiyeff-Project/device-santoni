@@ -517,12 +517,12 @@ vendor/lib64/libqmi_csi.so|5e3d7a6c18f10c30d152bd87cd24b0c787f6ded3
 vendor/lib64/libqmi_encdec.so|68fb631317150d66fd1a39c48f8ef9e0405bbdf2
 vendor/lib64/libqmiservices.so|842a1b61fad7dd34753e945ee2ada0fdc9589c09
 
-# QMI - from LA.UM.8.6.2.r1-07800-89xx.0
-vendor/lib/libpdmapper.so|0959fa03d43b08dea91a57ed6aea228751f80573
-vendor/lib/libqmi_cci.so|475321e87d75f35ecf7c98004ba777064ef11c0d
-vendor/lib64/libpdmapper.so|b837641e006ff90a49764d7ac78553de537acd74
-vendor/lib64/libqmi_cci.so|301271923d990e035416fb1ebc3d1b8b6f7b55b7
-vendor/lib64/libqsocket.so|6264041e0e897f78dc9b6a4be6424cbd927669d0
+# QMI - from LA.UM.8.6.2.r1-08600-89xx.0
+vendor/lib/libpdmapper.so|b15fe37992de31b741a5d147174f43e426674412
+vendor/lib/libqmi_cci.so|655d91a0c4a88485673c596ca1f67d07a4da450d
+vendor/lib64/libpdmapper.so|4d3036363aa552a49bc319d093a4d85b1dc7eb84
+vendor/lib64/libqmi_cci.so|c269414ff61b0abc5fb18048a2829006c87af661
+vendor/lib64/libqsocket.so|40816476d857f2ad07490415f6ff7433517ccef8
 
 # Radio - from tissot-user-9-PKQ1.180917.001-V10.0.20.0.PDHMIXM-release-keys
 -app/QtiTelephonyService/QtiTelephonyService.apk:product/app/QtiTelephonyService/QtiTelephonyService.apk|420b39e20a5166940c1e2e55e8d9c92ec910cebb
@@ -574,14 +574,14 @@ vendor/lib64/vendor.qti.hardware.radio.uim_remote_client@1.0.so|bf72b4543af85ba2
 vendor/lib64/vendor.qti.hardware.radio.uim_remote_server@1.0.so|99296dc2831410fed5df4e397845618b40d0a3a1
 vendor/radio/qcril_database/qcril.db|43b7d5e7ededc9cd5c0b1f7a8941d21d4eb0c9c1
 
-# Radio - from LA.UM.8.6.2.r1-07800-89xx.0
-product/framework/qti-telephony-common.jar|14e32b1cb0fdc9d7802414e95e41376499b51b11
+# Radio - from LA.UM.8.6.2.r1-08600-89xx.0
+product/framework/qti-telephony-common.jar|b5f3eb1d151cf61a2847865a9985da46045702d4
 -product/priv-app/qcrilmsgtunnel/qcrilmsgtunnel.apk|71d083671c3ea4cd5e287a63fb254bb0ab60ed20
 product/etc/permissions/qcrilhook.xml|ceb890ab3c1645aa0d0044abab1ba58c4097a991
 product/etc/permissions/telephony_product_privapp-permissions-qti.xml|68901007ba1a48ceb1b728fc3b5483dd51b5e3a0
 product/etc/permissions/telephonyservice.xml|a39eefcaf85fb8da60044fdbbcfddd95deb031c8
-vendor/bin/adpl|5d4b28d054f7209615195cb796e17d6facca33ee
-vendor/bin/port-bridge|28265e259a83b1370827f626fad4abe6784a9025
+vendor/bin/adpl|3fb6f1cf5f26cb926adf50be604da9b024bfd190
+vendor/bin/port-bridge|c24ac553a574052fafd37b93ddc2e4dccd8b41c8
 vendor/etc/init/dataadpl.rc|cd4907d9bfd438fe5f5c86f5d6cec590ac0bac2a
 vendor/etc/init/dataqti.rc|6abfd1a850d782adbbb6f42c9d8ca870036b2ad1
 vendor/etc/init/netmgrd.rc|711a0b87943ecd5308dc875395a9d67bd080dcef
@@ -631,21 +631,21 @@ vendor/lib64/vendor.qti.imsrtpservice@1.0.so|559a2dbf409d86746ed4303f2e0089256bb
 vendor/lib64/vendor.qti.ims.callinfo@1.0.so|5567616f4792889965b1bc254b245d5323ab6516
 vendor/lib64/vendor.qti.ims.rcsconfig@1.0.so|bee66b95aa31d6c536e27b67aed2094b0b63635f
 
-# Radio - IMS - from LA.UM.8.6.2.r1-07800-89xx.0
+# Radio - IMS - from LA.UM.8.6.2.r1-08600-89xx.0
 product/lib64/libimscamera_jni.so|41fd9faa10818c9f7c5a14d372a07f79b0ca0daa
-product/lib64/libimsmedia_jni.so|448795a73bbf72fc0c9876f86a13769139ea8022
--product/priv-app/ims/ims.apk|f2f355a2844a49b290bd7512ecb8df7833a1c0e1
+product/lib64/libimsmedia_jni.so|86ff68440540c40834c2e17261f178f7de50549e
+-product/priv-app/ims/ims.apk|1f583a1b7142890a7be316c87d17611a0653515a
 vendor/etc/init/ims_rtp_daemon.rc|b3c3a380204d7b1b3a58937db8c8e76c00ac8825
 vendor/etc/init/imsdatadaemon.rc|29face37c174aebcd1358f7d7ad0bd4baf83063b
 vendor/etc/init/imsqmidaemon.rc|dda16d842b7c65296e97bc9921b723a43b152ba3
 vendor/etc/init/imsrcsd.rc|2dc42ff6e4b6dd389bd3bc9a7af30dec2f1a45df
-vendor/lib64/vendor.qti.ims.rcsconfig@1.1.so|936011dbcfd05ea9350f7410bb6f4d69ddd3fb61
+vendor/lib64/vendor.qti.ims.rcsconfig@1.1.so|ce2b3153914239932f6c1880394869d05315143e
 product/lib64/lib-imscamera.so|6a7a65b3aa011207990eb2c71d1e7e2b79827006
-product/lib64/lib-imsvideocodec.so|68498a85f8eb379d3202aa7a45b75e9e185dbd6e
-product/lib64/lib-imsvt.so|09755a8bf61961ea9ee9846fb9612c11af144fad
-product/lib64/lib-imsvtextutils.so|c8065a0ddf21c3ba9cffdc61c2b5b6488081b8be
-product/lib64/lib-imsvtutils.so|8e9bba6bbad8e8e5d3cfa40831262db5c745e073
-vendor/lib64/lib-imsvtcore.so|34d211218ddce642e783c4696952ca672058d1b6
+product/lib64/lib-imsvideocodec.so|6874ba7f19f539dc85f955a1a610e49460ca639d
+product/lib64/lib-imsvt.so|c5ad916fd6908f5fc564f7ef6f5928926cc2347f
+product/lib64/lib-imsvtextutils.so|9a5401e755cda8f6e8cb5a160a003c6d1a043fff
+product/lib64/lib-imsvtutils.so|bb4ceb942a7c7e70d9cd783409d1993f6638ab42
+vendor/lib64/lib-imsvtcore.so|b5766dea28cb775b3904b0357309b16023bc3e18
 
 # Sensors - from LA.UM.8.6.2.r1-08600-89xx.0
 vendor/bin/sensors.qti|dafb23590aa6ff58201bf19c1b234d6c88385ce3
