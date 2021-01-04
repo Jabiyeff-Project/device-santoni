@@ -75,6 +75,9 @@ function blob_fixup() {
 	lib/libwfdnative.so | lib64/libwfdnative.so )
 		patchelf --remove-needed "android.hidl.base@1.0.so" "${2}"
         ;;
+    vendor/lib/libmmcamera_dbg.so )
+        sed -i "s|persist.camera.debug.logfile|persist.vendor.camera.dbglog|g" "${2}"
+        ;;
         esac
 }
 
