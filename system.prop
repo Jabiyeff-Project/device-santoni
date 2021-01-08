@@ -3,6 +3,9 @@
 # Enable iorapd perfetto tracing for app starts
 iorapd.perfetto.enable=true
 
+# Enable iorapd readahead for app starts
+iorapd.readahead.enable=true
+
 # QC framework value-adds
 ro.vendor.qti.va_aosp.support=1
 
