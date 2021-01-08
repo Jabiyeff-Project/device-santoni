@@ -1,5 +1,8 @@
 #system.prop for msm8937
 
+# Enable iorapd perfetto tracing for app starts
+iorapd.perfetto.enable=true
+
 # QC framework value-adds
 ro.vendor.qti.va_aosp.support=1
 
