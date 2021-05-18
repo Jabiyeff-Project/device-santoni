@@ -24,3 +24,12 @@ COMMON_LUNCH_CHOICES += \
     aosip_santoni-userdebug \
     aosip_santoni-user \
     aosip_santoni-eng
+
+# Bliss
+PRODUCT_MAKEFILES += \
+    $(LOCAL_DIR)/bliss_santoni.mk
+
+COMMON_LUNCH_CHOICES += \
+    bliss_santoni-userdebug \
+    bliss_santoni-user \
+    bliss_santoni-eng
