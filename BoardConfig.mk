@@ -52,7 +52,6 @@ BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01000000 --tags_offset 0x00000100
 TARGET_COMPILE_WITH_MSM_KERNEL := true
 TARGET_KERNEL_VERSION := 4.9
 TARGET_KERNEL_CLANG_COMPILE := true
-TARGET_KERNEL_CLANG_VERSION := proton
 
 # ANT
 BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
@@ -166,16 +165,10 @@ TARGET_NO_RPC := true
 # Filesystem
 TARGET_FS_CONFIG_GEN := $(DEVICE_PATH)/configs/config.fs
 
-# HALs
-QCOM_SOONG_NAMESPACE := hardware/qcom-caf/msm8937
-
 # HIDL
 DEVICE_FRAMEWORK_MANIFEST_FILE := $(DEVICE_PATH)/configs/manifests/framework_manifest.xml
 DEVICE_MANIFEST_FILE := $(DEVICE_PATH)/configs/manifests/manifest.xml
 DEVICE_MATRIX_FILE   := $(DEVICE_PATH)/configs/manifests/compatibility_matrix.xml
-ifeq ($(PRODUCT_NAME), lineage_santoni)
-DEVICE_MANIFEST_FILE += $(DEVICE_PATH)/configs/manifests/manifest-lineage.xml
-endif
 
 # Init
 TARGET_INIT_VENDOR_LIB := //$(DEVICE_PATH):libinit_santoni
@@ -201,9 +194,6 @@ BLOCK_BASED_OTA := true
 TARGET_PER_MGR_ENABLED := true
 
 # Power
-ifeq ($(PRODUCT_NAME), lineage_santoni)
-BOARD_POWER_CUSTOM_BOARD_LIB := libpower_8937
-endif
 TARGET_USES_INTERACTION_BOOST := true
 
 # Qualcomm
@@ -219,9 +209,6 @@ TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/fstab.qcom
 # SELinux
 include device/qcom/sepolicy-legacy-um/SEPolicy.mk
 BOARD_VENDOR_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
-ifeq ($(PRODUCT_NAME), lineage_santoni)
-BOARD_VENDOR_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy-lineage/vendor
-endif
 
 # Treble
 BOARD_VNDK_VERSION := current

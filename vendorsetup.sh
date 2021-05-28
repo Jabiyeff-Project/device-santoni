@@ -1,6 +1,7 @@
 if [ ! -f .repo/local_manifests/santoni.xml ]; then
     echo "Clone local_manifests"
-    git clone -b 11.0 https://github.com/Jabiyeff-Project/local_manifests.git .repo/local_manifests/
+    git clone -b ruby https://github.com/Jabiyeff-Project/local_manifests.git .repo/local_manifests/
+    repo sync -c --no-clone-bundle --current-branch --no-tags -j$(nproc --all)
 else
     echo "Pull local_manifests"
     cd .repo/local_manifests
