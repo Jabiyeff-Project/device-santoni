@@ -476,7 +476,3 @@ PRODUCT_BOOT_JARS += \
 PRODUCT_PACKAGES += \
     libnl
 
-# XiaomiParts
-PRODUCT_PACKAGES += \
-    XiaomiParts
-
