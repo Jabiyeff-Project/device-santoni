@@ -22,3 +22,6 @@ else
         export TARGET_KERNEL_CONFIG=santoni_defconfig
     fi
 fi
+
+export USE_CCACHE=1
+export CCACHE_EXEC=/usr/bin/ccache
