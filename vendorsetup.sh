@@ -22,3 +22,5 @@ else
         export TARGET_KERNEL_CONFIG=santoni_defconfig
     fi
 fi
+
+repo sync --force-sync android_hardware_qcom_audio android_hardware_qcom_display android_hardware_qcom_media
