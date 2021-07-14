@@ -34,7 +34,7 @@ COMMON_LUNCH_CHOICES += \
     bliss_santoni-user \
     bliss_santoni-eng
 
-# AOSiP
+# Derpfest
 PRODUCT_MAKEFILES += \
     $(LOCAL_DIR)/derp_santoni.mk
 
@@ -42,3 +42,12 @@ COMMON_LUNCH_CHOICES += \
     derp_santoni-userdebug \
     derp_santoni-user \
     derp_santoni-eng
+
+# Cherish
+PRODUCT_MAKEFILES += \
+    $(LOCAL_DIR)/cherish_santoni.mk
+
+COMMON_LUNCH_CHOICES += \
+    cherish_santoni-userdebug \
+    cherish_santoni-user \
+    cherish_santoni-eng
