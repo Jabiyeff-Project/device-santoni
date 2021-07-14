@@ -1,15 +1,10 @@
-
-color='\033[0;32m'
-color2='\033[0;31m'
-nc='\033[0m'
-
 if [ ! -f .repo/local_manifests/santoni.xml ]; then
-    echo "${color}Cloning local_manifests${nc}"
+    echo "Cloning local_manifests"
     git clone -b 11.0 https://github.com/Jabiyeff-Project/local_manifests.git .repo/local_manifests/
-    echo "${color}Syncing full sources (It will be take some time)${nc}"
+    echo "Syncing full sources (It will be take some time)"
     repo sync --force-sync -j$(nproc --all) -q
 else
-    echo "${color}Pulling local_manifests${nc}"
+    echo "Pulling local_manifests"
     cd .repo/local_manifests
     git pull
     cd ../..
@@ -17,11 +12,11 @@ else
 fi
 
 if [ ! -f kernel/xiaomi/msm8937/Makefile ]; then
-    echo "${color}Using default kernel${nc}"
+    echo "Using default kernel"
     export TARGET_KERNEL_SOURCE=kernel/xiaomi/santoni
     export TARGET_KERNEL_CONFIG=santoni_treble_defconfig
 else
-    echo "${color}Using custom kernel${nc}"
+    echo "Using custom kernel"
     export TARGET_KERNEL_SOURCE=kernel/xiaomi/msm8937
     if [ -f kernel/xiaomi/msm8937/arch/arm64/configs/santoni_treble_defconfig ]; then
         export TARGET_KERNEL_CONFIG=santoni_treble_defconfig
