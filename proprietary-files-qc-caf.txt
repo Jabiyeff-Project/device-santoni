@@ -187,14 +187,9 @@ vendor/lib64/libssd.so|9c7850a06f6caf5b3dc6ac1269a5b0be9f4fcde7
 vendor/lib64/libStDrvInt.so|add517206707a8bd7f116b6b1554a16c51fe6668
 
 # FM - from LA.UM.9.6.3.r1-04400-89xx.0
-vendor/bin/fm_qsoc_patches|13a2424d7e133faa656a2b03b7196899aa5d9b69
-vendor/etc/init.qti.fm.sh:vendor/bin/init.qti.fm.sh|0ac820dd85ebdf5fa73b5e971f6787ff35ceb65d
-vendor/etc/init/init.qti.fm.rc|4f5459058debbea76991e69f8522126f6655fd3b
-system_ext/lib64/fm_helium.so|b2440e4feaae8a7f5e2269525520f9774b6962fc
-system_ext/lib64/libfm-hci.so|758c6e7cfafc964b5cd9d71806ec5455e0d78716
 -system_ext/lib64/vendor.qti.hardware.fm@1.0.so|1f3cb360169a315d781bbebe57318cccbc8b681e
-vendor/lib64/vendor.qti.hardware.fm@1.0.so|bab0150ce3fdc5d180a32ab9499e7693be2e0d0a
 vendor/lib64/hw/vendor.qti.hardware.fm@1.0-impl.so|5f48a9ed98dad9fa59cf1a2469f53e1066ab24a6
+vendor/lib64/vendor.qti.hardware.fm@1.0.so|bab0150ce3fdc5d180a32ab9499e7693be2e0d0a
 
 # Gatekeeper - from LA.UM.9.6.2.r1-04200-89xx.0
 vendor/lib/hw/gatekeeper.msm8937.so|6569776d73f57c9a213a38707351db6e8ffa68a6
