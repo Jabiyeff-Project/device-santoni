@@ -1,7 +1,5 @@
-# LineageOS (crDroid)
-PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/lineage_santoni.mk
 
+<<<<<<< Updated upstream
 COMMON_LUNCH_CHOICES := \
     lineage_santoni-userdebug \
     lineage_santoni-user \
@@ -71,10 +69,13 @@ COMMON_LUNCH_CHOICES += \
     corvus_santoni-eng
 
 # RevengeOS
+=======
+# CygnusOS
+>>>>>>> Stashed changes
 PRODUCT_MAKEFILES += \
-    $(LOCAL_DIR)/revengeos_santoni.mk
+    $(LOCAL_DIR)/cygnus_santoni.mk
 
 COMMON_LUNCH_CHOICES += \
-    revengeos_santoni-userdebug \
-    revengeos_santoni-user \
-    revengeos_santoni-eng
+    cygnus_santoni-userdebug \
+    cygnus_santoni-user \
+    cygnus_santoni-eng
