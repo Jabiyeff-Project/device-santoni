@@ -1,3 +1,5 @@
+ifeq ($(PRODUCT_NAME), lineage_santoni)
+
 LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
@@ -22,3 +24,5 @@ LOCAL_SHARED_LIBRARIES := \
     vendor.lineage.touch@1.0
 
 include $(BUILD_EXECUTABLE)
+
+endif
